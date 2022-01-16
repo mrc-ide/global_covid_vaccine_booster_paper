@@ -14,7 +14,7 @@ run_scenario <-
            dt = 0.2,
            repetition = 1,
            seeding_cases = 10,
-           vf,
+           vfr,
            vfr_time1,
            vfr_time2,
            dose_3_fold_increase = 1,

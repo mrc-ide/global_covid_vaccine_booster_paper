@@ -89,14 +89,11 @@ nrow(scenarios)
 write_csv(scenarios, paste0("scenarios_", name, ".csv"))
 
 ## test on PC
-
 source("R/run_function_abmodel_omicron_lmic.R")
 source("R/utils.R")
 source("R/vaccine_strategy.R")
 plan(multicore, workers = 4)
 system.time({out <- future_pmap(scenarios, run_scenario, .progress = TRUE)})
-
-
 
 #### Run the model on cluster ###############################################
 # Load functions
@@ -108,12 +105,10 @@ ctx <- context::context_save("context",
                              package_sources = src)
 
 config <- didehpc::didehpc_config(use_rrq = FALSE, use_workers = FALSE, cluster="fi--didemrchnb")
-#config <- didehpc::didehpc_config(use_rrq = FALSE, use_workers = FALSE, cluster="fi--dideclusthn")
 
 # Create the queue
 run <- didehpc::queue_didehpc(ctx, config = config)
-# Summary of all available clusters
-# run$cluster_load(nodes = FALSE)
+
 # Run
 runs <- run$enqueue_bulk(scenarios, run_scenario, do_call = TRUE, progress = TRUE)
 runs$status()

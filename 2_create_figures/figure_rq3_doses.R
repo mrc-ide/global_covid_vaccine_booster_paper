@@ -29,7 +29,7 @@ ggplot(data = filter(df_summarise, max_Rt_omicron == 3,
   geom_line(aes(x = as.Date(date), y = Rt), col = "red") +
   facet_grid(Rt_lift_t ~ strategy_name) +
   labs(x = "Date. Note red line shows lifting Rt", y = "Doses delivered per person")
-ggsave("plots/doses_vs_lifting_Rt_rq3.png", height = 6, width = 10)
+#ggsave("plots/doses_vs_lifting_Rt_rq3.png", height = 6, width = 10)
 
 #################################################
 # blue-green doses barplot

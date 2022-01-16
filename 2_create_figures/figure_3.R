@@ -179,12 +179,12 @@ x <- df_barchart %>%
   select(-sensitivity_scenario, -rollout_rate, -dose_3_timing) 
 x
 ### 9 age groups
-(1516  -1379)/1516
-(5262-4755)/5262
+(1400 -1266)/1400
+(4987-4500)/4987
 
 ### 5 age groups
-(1900-1810)/1900
-(5664-5438)/5664
+(1798-1798)/1795
+(5658-5338)/5658
 
 
 # barplot summary of deaths
@@ -244,6 +244,9 @@ combined <- plot_doses + hosp_omicron + deaths_omicron+ p_deaths_summary  +
 combined
 ggsave(paste0("plots/fig3_age_groups_covered_", ages_covered, ".png"),combined, height = 11, width = 11)
 
-nat_omicron
-ggsave("plots/nat_omicron_rq2.png",nat_omicron, height = 3.5, width = 11)
+if (ages_covered == 9) {
+  nat_omicron
+  ggsave("plots/nat_omicron_rq2.png",nat_omicron, height = 3.5, width = 11)
+}
+
 

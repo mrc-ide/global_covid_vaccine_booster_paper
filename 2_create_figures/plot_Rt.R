@@ -18,7 +18,8 @@ name <- "rq3_hic_abmodel_omicron_SD1"
 df3o <- readRDS(paste0("processed_outputs/df_summarise_", name, ".rds")) %>%
   filter(vaccine_doses == 3,
          t_d3 == 180,
-         strategy_name == "10y+ 2 doses, booster 10y+") %>%
+         strategy_name == "10y+ 2 doses, booster 10y+",
+         hosp_scal_omicron == 0.5) %>%
          select(date, Rt, max_Rt_omicron, Rt_lift_t) %>%
          mutate(Rt_lift_t = factor(Rt_lift_t, levels = c("Sept '21 lift", "Nov '21 lift", "April '22 lift", "Slow April '22 lift"), ordered = TRUE))
 

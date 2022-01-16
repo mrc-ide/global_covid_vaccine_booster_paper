@@ -23,7 +23,7 @@ df <- df %>%
                                            if_else(vaccine_doses == 3 & age_groups_covered == 15 & age_groups_covered_d3 == 15, "10y+ 2 doses, booster 10y+", "NA")))))) %>%
   mutate(rollout_rate = if_else(vacc_per_week == 0.05, "Default", if_else(vacc_per_week < 0.05, "Slower rollout", "None"))) %>%
   mutate(dose_3_timing = if_else(t_d3 == 180, "6 months (default)", if_else(t_d3 == 90, "3 months", if_else(t_d3 == 360, "12 months", "NA")))) %>%
-  mutate(severity = factor(hosp_scal_omicron, levels = c(0.4, 0.5, 0.6), labels = c("60%", "50% (default)", "40%"))) %>%
+  mutate(severity = factor(hosp_scal_omicron, levels = c(0.3, 0.5, 0.6), labels = c("70%", "50% (default)", "40%"))) %>%
   mutate(vfr_lab = case_when(vfr==min_vfr ~ "Optimistic scenario",
                              vfr==central_vfr ~ "Central scenario",
                              vfr==max_vfr ~ "Pessimistic scenario"))

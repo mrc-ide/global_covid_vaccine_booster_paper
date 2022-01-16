@@ -1,6 +1,5 @@
 name <- "counterfactual_lmic"
 fit1 <- "imp_v2_20211219_AZPD2=FALSE_SB=TRUE_NewDecay=TRUE"
-fit <- "imp_v2_20211219_AZPD2=FALSE_SB=TRUE_NewDecay=TRUE_SD1"
 
 R_profile <- read_csv("data/category_2_Rt.csv") 
 saveRDS(R_profile,"data/R_profile_lmic.rds")

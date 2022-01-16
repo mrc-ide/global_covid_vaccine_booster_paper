@@ -35,11 +35,9 @@ ab_model_infection <- TRUE
 strategy <- "realistic"
 t_d3 <- 180
 max_Rt <- 3
-#max_Rt_omicron <- 4.5 # c(4.25,4.5,4.75)
 vfr_time1 <- "11/27/2021"
 vfr_time2 <- "12/31/2021"
 vfr <- unique(vacc_params$vfr)
-#hosp_scal_omicron <- c(0.4,0.5,0.6)
 ICU_scal_omicron <-  0.42
 mu_ab_infection <- 1.7 
 
@@ -97,8 +95,6 @@ scenarios <- left_join(scenarios, vacc_params, by = c("vaccine", "vfr")) %>%
 nrow(scenarios)
 write_csv(scenarios, paste0("scenarios_", name, ".csv"))
 
-
-
 ## test on PC
 source("R/run_function_abmodel_omicron_zerocovid.R")
 source("R/utils.R")
@@ -116,12 +112,10 @@ ctx <- context::context_save("context",
                              package_sources = src)
 
 config <- didehpc::didehpc_config(use_rrq = FALSE, use_workers = FALSE, cluster="fi--didemrchnb")
-#config <- didehpc::didehpc_config(use_rrq = FALSE, use_workers = FALSE, cluster="fi--dideclusthn")
 
 # Create the queue
 run <- didehpc::queue_didehpc(ctx, config = config)
-# Summary of all available clusters
-# run$cluster_load(nodes = FALSE)
+
 # Run
 runs <- run$enqueue_bulk(scenarios, run_scenario, do_call = TRUE, progress = TRUE)
 runs$status()

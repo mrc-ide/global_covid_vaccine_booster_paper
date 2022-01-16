@@ -1,7 +1,6 @@
 name <- "rq1_hic_abmodel_omicron_SD1"
 
 fit1 <- "imp_v2_20211219_AZPD2=FALSE_SB=TRUE_NewDecay=TRUE"
-fit <- "imp_v2_20211219_AZPD2=FALSE_SB=TRUE_NewDecay=TRUE_SD1"
 
 R_profile <- read_csv("data/category_1_Rt.csv") 
 saveRDS(R_profile,"data/R_profile_hic.rds")
@@ -90,16 +89,12 @@ nrow(scenarios)
 
 write.csv(scenarios, paste0("scenarios_", name, ".csv"), row.names = FALSE)
 
-
-
 ## test on PC
 source("R/run_function_abmodel_omicron.R")
 source("R/utils.R")
 source("R/vaccine_strategy.R")
 plan(multicore, workers = 4)
 system.time({out <- future_pmap(scenarios, run_scenario, .progress = TRUE)})
-
-
 
 #### Run the model on cluster ###############################################
 # Load functions
@@ -111,12 +106,10 @@ ctx <- context::context_save("context",
                              package_sources = src)
 
 config <- didehpc::didehpc_config(use_rrq = FALSE, use_workers = FALSE, cluster="fi--didemrchnb")
-#config <- didehpc::didehpc_config(use_rrq = FALSE, use_workers = FALSE, cluster="fi--dideclusthn")
 
 # Create the queue
 run <- didehpc::queue_didehpc(ctx, config = config)
-# Summary of all available clusters
-# run$cluster_load(nodes = FALSE)
+
 # Run
 runs <- run$enqueue_bulk(scenarios, run_scenario, do_call = TRUE, progress = TRUE)
 runs$status()

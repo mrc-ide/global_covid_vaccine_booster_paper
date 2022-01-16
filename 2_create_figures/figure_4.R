@@ -159,18 +159,19 @@ infections_summary_omicron
 
 df1_nat <- df1_omicron %>%
   mutate(titre = nat_med, nat_label = "All") %>%
-  select(date, titre, Rt_lift_t, nat_label, strategy_name)
+  select(date, titre, Rt_lift_t, nat_label, strategy_name, vfr)
 
 df1_vax_ab <- df1_omicron %>%
   mutate(titre = vax_ab_med, nat_label = "Vaccination") %>%
-  select(date, titre, Rt_lift_t, nat_label, strategy_name)
+  select(date, titre, Rt_lift_t, nat_label, strategy_name, vfr)
 
 df1_nat_ab <- df1_omicron %>%
   mutate(titre = nat_ab_med, nat_label = "Infection-induced") %>%
-  select(date, titre, Rt_lift_t, nat_label, strategy_name)
+  select(date, titre, Rt_lift_t, nat_label, strategy_name, vfr)
 
 df1_nat <- rbind(df1_nat, df1_vax_ab, df1_nat_ab) %>%
-  filter(strategy_name == "10y+ 2 doses, booster 10y+")
+  filter(strategy_name == "10y+ 2 doses, booster 10y+",
+         vfr == central_VFR)
 
 
 
